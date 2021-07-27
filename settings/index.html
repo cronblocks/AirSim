@@ -14,7 +14,7 @@
 
   <link rel="stylesheet" href="../css/theme.css" />
   <link rel="stylesheet" href="../css/theme_extra.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
   
   <script>
     // Current page data
@@ -25,9 +25,8 @@
   
   <script src="../js/jquery-2.1.1.min.js" defer></script>
   <script src="../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
-  
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -41,7 +40,7 @@
         <a href=".." class="icon icon-home"> AirSim</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -139,6 +138,8 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#external-cameras">External Cameras</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#vehicles-settings">Vehicles Settings</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#common-vehicle-setting">Common Vehicle Setting</a>
@@ -217,6 +218,8 @@
                     <li class="toctree-l1"><a class="reference internal" href="../design/">Architecture</a>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../code_structure/">Code Structure</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../adding_new_apis/">Adding new APIs</a>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../coding_guidelines/">Coding Guidelines</a>
                     </li>
@@ -303,6 +306,8 @@
                     </li>
                     <li class="toctree-l1"><a class="" href="https://youtu.be/Bp86WiLUC80">Importing a custom multirotor mesh</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../object_detection/">Object Detection</a>
+                    </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Misc</span></p>
                 <ul>
@@ -372,21 +377,37 @@
   
   <hr/>
 </div>
+
           <div role="main">
             <div class="section">
               
                 <h1 id="airsim-settings">AirSim Settings<a class="headerlink" href="#airsim-settings" title="Permanent link">#</a></h1>
 <h2 id="where-are-settings-stored">Where are Settings Stored?<a class="headerlink" href="#where-are-settings-stored" title="Permanent link">#</a></h2>
-<p>AirSim is searching for the settings definition in 4 different ways in the following order. The first match will be used:</p>
+<p>AirSim is searching for the settings definition in the following order. The first match will be used:</p>
 <ol>
-<li>Looking at the (absolute) path specified by the <code>--settings</code> command line argument.<br />
-For example, in Windows: <code>AirSim.exe --settings 'C:\path\to\settings.json'</code> <br />
-In Linux <code>./Blocks.sh --settings '/home/$USER/path/to/settings.json'</code></li>
-<li>Looking for a json document passed as a command line argument by the <code>--settings</code> argument.<br />
-For example, in Windows: <code>AirSim.exe --settings '{"foo" : "bar"}'</code> <br />
-In Linux <code>./Blocks.sh --settings '{"foo" : "bar"}'</code></li>
-<li>Looking in the folder of the executable for a file called <code>settings.json</code>.</li>
-<li>Looking in the users home folder for a file called <code>settings.json</code>. The AirSim subfolder is located at <code>Documents\AirSim</code> on Windows and <code>~/Documents/AirSim</code> on Linux systems.</li>
+<li>
+<p>Looking at the (absolute) path specified by the <code>--settings</code> command line argument.
+For example, in Windows: <code>AirSim.exe --settings 'C:\path\to\settings.json'</code>
+In Linux <code>./Blocks.sh --settings '/home/$USER/path/to/settings.json'</code></p>
+</li>
+<li>
+<p>Looking for a json document passed as a command line argument by the <code>--settings</code> argument.
+For example, in Windows: <code>AirSim.exe --settings '{"foo" : "bar"}'</code>
+In Linux <code>./Blocks.sh --settings '{"foo" : "bar"}'</code></p>
+</li>
+<li>
+<p>Looking in the folder of the executable for a file called <code>settings.json</code>.
+This will be a deep location where the actual executable of the Editor or binary is stored.
+For e.g. with the Blocks binary, the location searched is <code>&lt;path-of-binary&gt;/LinuxNoEditor/Blocks/Binaries/Linux/settings.json</code>.</p>
+</li>
+<li>
+<p>Searching for <code>settings.json</code> in the folder from where the executable is launched</p>
+<p>This is a top-level directory containing the launch script or executable. For e.g. Linux: <code>&lt;path-of-binary&gt;/LinuxNoEditor/settings.json</code>, Windows: <code>&lt;path-of-binary&gt;/WindowsNoEditor/settings.json</code></p>
+<p>Note that this path changes depending on where its invoked from. On Linux, if executing the <code>Blocks.sh</code> script from inside LinuxNoEditor folder like <code>./Blocks.sh</code>, then the previous mentioned path is used. However, if launched from outside LinuxNoEditor folder such as <code>./LinuxNoEditor/Blocks.sh</code>, then <code>&lt;path-of-binary&gt;/settings.json</code> will be used.</p>
+</li>
+<li>
+<p>Looking in the AirSim subfolder for a file called <code>settings.json</code>. The AirSim subfolder is located at <code>Documents\AirSim</code> on Windows and <code>~/Documents/AirSim</code> on Linux systems.</p>
+</li>
 </ol>
 <p>The file is in usual <a href="https://en.wikipedia.org/wiki/JSON">json format</a>. On first startup AirSim would create <code>settings.json</code> file with no settings at the users home folder. To avoid problems, always use ASCII format to save json file.</p>
 <h2 id="how-to-chose-between-car-and-multirotor">How to Chose Between Car and Multirotor?<a class="headerlink" href="#how-to-chose-between-car-and-multirotor" title="Permanent link">#</a></h2>
@@ -488,14 +509,14 @@ In Linux <code>./Blocks.sh --settings '{"foo" : "bar"}'</code></li>
     "UpdateIntervalSecs": 60
   },
   "SubWindows": [
-    {"WindowID": 0, "CameraName": "0", "ImageType": 3, "VehicleName": "", "Visible": false},
-    {"WindowID": 1, "CameraName": "0", "ImageType": 5, "VehicleName": "", "Visible": false},
-    {"WindowID": 2, "CameraName": "0", "ImageType": 0, "VehicleName": "", "Visible": false}
+    {"WindowID": 0, "CameraName": "0", "ImageType": 3, "VehicleName": "", "Visible": false, "External": false},
+    {"WindowID": 1, "CameraName": "0", "ImageType": 5, "VehicleName": "", "Visible": false, "External": false},
+    {"WindowID": 2, "CameraName": "0", "ImageType": 0, "VehicleName": "", "Visible": false, "External": false}
   ],
   "SegmentationSettings": {
     "InitMethod": "",
     "MeshNamingMethod": "",
-    "OverrideExisting": false
+    "OverrideExisting": true
   },
   "PawnPaths": {
     "BareboneCar": {"PawnBP": "Class'/AirSim/VehicleAdv/Vehicle/VehicleAdvPawn.VehicleAdvPawn_C'"},
@@ -544,6 +565,14 @@ In Linux <code>./Blocks.sh --settings '{"foo" : "bar"}'</code></li>
       "X": NaN, "Y": NaN, "Z": NaN,
       "Pitch": NaN, "Roll": NaN, "Yaw": NaN
     }
+  },
+  "ExternalCameras": {
+    "FixedCamera1": {
+        // same elements as in CameraDefaults above
+    },
+    "FixedCamera2": {
+        // same elements as in CameraDefaults above
+    }
   }
 }</code></pre>
 <h2 id="simmode">SimMode<a class="headerlink" href="#simmode" title="Permanent link">#</a></h2>
@@ -568,7 +597,14 @@ In Linux <code>./Blocks.sh --settings '{"foo" : "bar"}'</code></li>
 <h2 id="origingeopoint">OriginGeopoint<a class="headerlink" href="#origingeopoint" title="Permanent link">#</a></h2>
 <p>This setting specifies the latitude, longitude and altitude of the Player Start component placed in the Unreal environment. The vehicle's home point is computed using this transformation. Note that all coordinates exposed via APIs are using NED system in SI units which means each vehicle starts at (0, 0, 0) in NED system. Time of Day settings are computed for geographical coordinates specified in <code>OriginGeopoint</code>.</p>
 <h2 id="subwindows">SubWindows<a class="headerlink" href="#subwindows" title="Permanent link">#</a></h2>
-<p>This setting determines what is shown in each of 3 subwindows which are visible when you press 0,1,2 keys. The <code>WindowID</code> can be 0 to 2, <code>CameraName</code> is any <a href="../image_apis/#available_cameras">available camera</a> on the vehicle. <code>ImageType</code> integer value determines what kind of image gets shown according to <a href="../image_apis/#available-imagetype">ImageType enum</a>. <code>VehicleName</code> string allows you to specify the vehicle to use the camera from, used when multiple vehicles are specified in the settings. First vehicle's camera will be used if there are any mistakes such as incorrect vehicle name, or only a single vehicle.</p>
+<p>This setting determines what is shown in each of 3 subwindows which are visible when you press 1,2,3 keys. </p>
+<ul>
+<li><code>WindowID</code>: Can be 0 to 2</li>
+<li><code>CameraName</code>: is any <a href="../image_apis/#available-cameras">available camera</a> on the vehicle or external camera</li>
+<li><code>ImageType</code>: integer value determines what kind of image gets shown according to <a href="../image_apis/#available-imagetype-values">ImageType enum</a>.</li>
+<li><code>VehicleName</code>: string allows you to specify the vehicle to use the camera from, used when multiple vehicles are specified in the settings. First vehicle's camera will be used if there are any mistakes such as incorrect vehicle name, or only a single vehicle.</li>
+<li><code>External</code>: Set it to <code>true</code> if the camera is an external camera. If true, then the <code>VehicleName</code> parameter is ignored</li>
+</ul>
 <p>For example, for a single car vehicle, below shows driver view, front bumper view and rear view as scene, depth and surface normals respectively.
 <pre class="highlight"><code class="language-json">  "SubWindows": [
     {"WindowID": 0, "ImageType": 0, "CameraName": "3", "Visible": true},
@@ -592,6 +628,7 @@ In Linux <code>./Blocks.sh --settings '{"foo" : "bar"}'</code></li>
 <li>When <code>PixelsAsFloat</code> is true, image is saved as <a href="../pfm/">pfm</a> file instead of png file.</li>
 <li><code>VehicleName</code> option allows you to specify separate cameras for individual vehicles. If the <code>Cameras</code> element isn't present, <code>Scene</code> image from the default camera of each vehicle will be recorded.</li>
 <li>If you don't want to record any images and just the vehicle's physics data, then specify the <code>Cameras</code> element but leave it empty, like this: <code>"Cameras": []</code></li>
+<li>External cameras are currently not supported in recording</li>
 </ul>
 </li>
 </ul>
@@ -650,6 +687,8 @@ In Linux <code>./Blocks.sh --settings '{"foo" : "bar"}'</code></li>
 * <code>HorzDistortionStrength</code>: This determines how large is the distortion.</p>
 <h3 id="gimbal">Gimbal<a class="headerlink" href="#gimbal" title="Permanent link">#</a></h3>
 <p>The <code>Gimbal</code> element allows to freeze camera orientation for pitch, roll and/or yaw. This setting is ignored unless <code>ImageType</code> is -1. The <code>Stabilization</code> is defaulted to 0 meaning no gimbal i.e. camera orientation changes with body orientation on all axis. The value of 1 means full stabilization. The value between 0 to 1 acts as a weight for fixed angles specified (in degrees, in world-frame) in <code>Pitch</code>, <code>Roll</code> and <code>Yaw</code> elements and orientation of the vehicle body. When any of the angles is omitted from json or set to NaN, that angle is not stabilized (i.e. it moves along with vehicle body).</p>
+<h2 id="external-cameras">External Cameras<a class="headerlink" href="#external-cameras" title="Permanent link">#</a></h2>
+<p>This element allows specifying cameras which are separate from the cameras attached to the vehicle, such as a CCTV camera. These are fixed cameras, and don't move along with the vehicles. The key in the element is the name of the camera, and the value i.e. settings are the same as <code>CameraDefaults</code> described above. All the camera APIs work with external cameras, including capturing images, changing the pose, etc by passing the parameter <code>external=True</code> in the API call.</p>
 <h2 id="vehicles-settings">Vehicles Settings<a class="headerlink" href="#vehicles-settings" title="Permanent link">#</a></h2>
 <p>Each simulation mode will go through the list of vehicles specified in this setting and create the ones that has <code>"AutoCreate": true</code>. Each vehicle specified in this setting has key which becomes the name of the vehicle. If <code>"Vehicles"</code> element is missing then this list is populated with default car named "PhysXCar" and default multirotor named "SimpleFlight".</p>
 <h3 id="common-vehicle-setting">Common Vehicle Setting<a class="headerlink" href="#common-vehicle-setting" title="Permanent link">#</a></h3>
@@ -807,19 +846,22 @@ By specifying different ports, the user can run multiple environments in paralle
   </div>
 
   <div class="rst-versions" role="note" aria-label="versions">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-          <a href="https://github.com/microsoft/airsim/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
-      
-      
-        <span><a href="../dev_workflow/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../camera_views/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/microsoft/airsim/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../dev_workflow/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../camera_views/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
 </div>
     <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
     <script src="../js/theme.js" defer></script>
       <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" defer></script>
       <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>

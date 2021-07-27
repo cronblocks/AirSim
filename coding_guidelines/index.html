@@ -14,7 +14,7 @@
 
   <link rel="stylesheet" href="../css/theme.css" />
   <link rel="stylesheet" href="../css/theme_extra.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
   
   <script>
     // Current page data
@@ -25,9 +25,8 @@
   
   <script src="../js/jquery-2.1.1.min.js" defer></script>
   <script src="../js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
-  
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -41,7 +40,7 @@
         <a href=".." class="icon icon-home"> AirSim</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -136,6 +135,8 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../code_structure/">Code Structure</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../adding_new_apis/">Adding new APIs</a>
+                    </li>
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">Coding Guidelines</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#quick-note">Quick Note</a>
@@ -154,7 +155,11 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#pointers">Pointers</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#null-checking">Null Checking</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#indentation">Indentation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#line-breaks">Line Breaks</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#this-is-too-short-ye">This is Too Short, ye?</a>
     </li>
@@ -243,6 +248,8 @@
                     </li>
                     <li class="toctree-l1"><a class="" href="https://youtu.be/Bp86WiLUC80">Importing a custom multirotor mesh</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../object_detection/">Object Detection</a>
+                    </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Misc</span></p>
                 <ul>
@@ -312,6 +319,7 @@
   
   <hr/>
 </div>
+
           <div role="main">
             <div class="section">
               
@@ -436,8 +444,16 @@ where performance is paramount, raw pointers can be used.  Raw pointers are also
 that only accept pointer types, for example, sockets API.  But we try to wrap those legacy interfaces as
 much as possible and avoid that style of programming from leaking into the larger code base.  </p>
 <p>Religiously check if you can use const everywhere, for example, <code>const float * const xP</code>. Avoid using prefix or suffix to indicate pointer types in variable names, i.e. use <code>my_obj</code> instead of <code>myobj_ptr</code> except in cases where it might make sense to differentiate variables better, for example, <code>int mynum = 5; int* mynum_ptr = mynum;</code></p>
+<h2 id="null-checking">Null Checking<a class="headerlink" href="#null-checking" title="Permanent link">#</a></h2>
+<p>In Unreal C++ code, when checking if a pointer is null, it is preferable to use <code>IsValid(ptr)</code>. In addition to checking for a null pointer, this function will also return whether a UObject is properly initialized. This is useful in situations where a UObject is in the process of being garbage collected but still set to a non-null value.</p>
 <h2 id="indentation">Indentation<a class="headerlink" href="#indentation" title="Permanent link">#</a></h2>
 <p>The C++ code base uses four spaces for indentation (not tabs).</p>
+<h2 id="line-breaks">Line Breaks<a class="headerlink" href="#line-breaks" title="Permanent link">#</a></h2>
+<p>Files should be committed with Unix line breaks. When working on Windows, git can be configured to checkout files with Windows line breaks and automatically convert from Windows to Unix line breaks when committing by running the following command:</p>
+<pre class="highlight"><code>git config --global core.autocrlf true</code></pre>
+<p>When working on Linux, it is preferable to configure git to checkout files with Unix line breaks by running the following command:</p>
+<pre class="highlight"><code>git config --global core.autocrlf input</code></pre>
+<p>For more details on this setting, see <a href="https://docs.github.com/en/get-started/getting-started-with-git/configuring-git-to-handle-line-endings">this documentation</a>.</p>
 <h2 id="this-is-too-short-ye">This is Too Short, ye?<a class="headerlink" href="#this-is-too-short-ye" title="Permanent link">#</a></h2>
 <p>Yes, and it's on purpose because no one likes to read 200 page coding guidelines. The goal here is to cover only most significant things which are 
 already not covered by <a href="http://shitalshah.com/p/how-to-enable-and-use-gcc-strict-mode-compilation/">strict mode compilation in GCC</a> and Level 4 
@@ -453,7 +469,7 @@ and <a href="http://shop.oreilly.com/product/0636920033707.do">Effective Modern 
         <a href="../flight_controller/" class="btn btn-neutral float-right" title="Flight Controller">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../code_structure/" class="btn btn-neutral" title="Code Structure"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../adding_new_apis/" class="btn btn-neutral" title="Adding new APIs"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -478,19 +494,22 @@ and <a href="http://shop.oreilly.com/product/0636920033707.do">Effective Modern 
   </div>
 
   <div class="rst-versions" role="note" aria-label="versions">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-          <a href="https://github.com/microsoft/airsim/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
-      
-      
-        <span><a href="../code_structure/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../flight_controller/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/microsoft/airsim/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../adding_new_apis/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../flight_controller/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
 </div>
     <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
     <script src="../js/theme.js" defer></script>
       <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" defer></script>
       <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>

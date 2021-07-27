@@ -14,7 +14,7 @@
 
   <link rel="stylesheet" href="css/theme.css" />
   <link rel="stylesheet" href="css/theme_extra.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
   
   <script>
     // Current page data
@@ -25,9 +25,8 @@
   
   <script src="js/jquery-2.1.1.min.js" defer></script>
   <script src="js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
-  
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -41,7 +40,7 @@
         <a href="." class="icon icon-home"> AirSim</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -51,6 +50,54 @@
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href=".">Home</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#how-to-get-it">How to Get It</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#windows">Windows</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#linux">Linux</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#macos">macOS</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-to-use-it">How to Use It</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#documentation">Documentation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#manual-drive">Manual drive</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#programmatic-control">Programmatic control</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#gathering-training-data">Gathering training data</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#computer-vision-mode">Computer Vision mode</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#weather-effects">Weather Effects</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tutorials">Tutorials</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#participate">Participate</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#paper">Paper</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#contribute">Contribute</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#who-is-using-airsim">Who is Using AirSim?</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#contact">Contact</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#whats-new">What's New</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#faq">FAQ</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#code-of-conduct">Code of Conduct</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#license">License</a>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -138,6 +185,8 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="code_structure/">Code Structure</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="adding_new_apis/">Adding new APIs</a>
+                    </li>
                     <li class="toctree-l1"><a class="reference internal" href="coding_guidelines/">Coding Guidelines</a>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="flight_controller/">Flight Controller</a>
@@ -223,6 +272,8 @@
                     </li>
                     <li class="toctree-l1"><a class="" href="https://youtu.be/Bp86WiLUC80">Importing a custom multirotor mesh</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="object_detection/">Object Detection</a>
+                    </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Misc</span></p>
                 <ul>
@@ -292,13 +343,11 @@
   
   <hr/>
 </div>
+
           <div role="main">
             <div class="section">
               
-                <h2 id="last-announcement">Last announcement<a class="headerlink" href="#last-announcement" title="Permanent link">#</a></h2>
-<p>The AirSim team is trying to get a better understanding of how AirSim and other simulation engines are being used across the community. If you have a couple of minutes, please take a look and respond to the AirSim survey as it does have an impact on the features and direction of the platform:</p>
-<p><a href="https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR4J_69QtqUREtdPd5aLYTsFURDJPQUFSNDI3T0VENzJHUjVQVkpVWlRFNC4u">Survey link</a></p>
-<h1 id="welcome-to-airsim">Welcome to AirSim<a class="headerlink" href="#welcome-to-airsim" title="Permanent link">#</a></h1>
+                <h1 id="welcome-to-airsim">Welcome to AirSim<a class="headerlink" href="#welcome-to-airsim" title="Permanent link">#</a></h1>
 <p>AirSim is a simulator for drones, cars and more, built on <a href="https://www.unrealengine.com/">Unreal Engine</a> (we now also have an experimental <a href="https://unity3d.com/">Unity</a> release). It is open-source, cross platform, and supports software-in-the-loop simulation with popular flight controllers such as PX4 &amp; ArduPilot and hardware-in-loop with PX4 for physically and visually realistic simulations. It is developed as an Unreal plugin that can simply be dropped into any Unreal environment. Similarly, we have an experimental release for a Unity plugin.</p>
 <p>Our goal is to develop AirSim as a platform for AI research to experiment with deep learning, computer vision and reinforcement learning algorithms for autonomous vehicles. For this purpose, AirSim also exposes APIs to retrieve data and control vehicles in a platform independent way.</p>
 <p><strong>Check out the quick 1.5 minute demo</strong></p>
@@ -324,21 +373,21 @@
 <p>View our <a href="https://microsoft.github.io/AirSim/">detailed documentation</a> on all aspects of AirSim.</p>
 <h3 id="manual-drive">Manual drive<a class="headerlink" href="#manual-drive" title="Permanent link">#</a></h3>
 <p>If you have remote control (RC) as shown below, you can manually control the drone in the simulator. For cars, you can use arrow keys to drive manually.</p>
-<p><a href="https://microsoft.github.io/AirSim/remote_control/">More details</a></p>
+<p><a href="https://microsoft.github.io/AirSim/remote_control">More details</a></p>
 <p><img alt="record screenshot" src="images/AirSimDroneManual.gif" /></p>
 <p><img alt="record screenshot" src="images/AirSimCarManual.gif" /></p>
 <h3 id="programmatic-control">Programmatic control<a class="headerlink" href="#programmatic-control" title="Permanent link">#</a></h3>
 <p>AirSim exposes APIs so you can interact with the vehicle in the simulation programmatically. You can use these APIs to retrieve images, get state, control the vehicle and so on. The APIs are exposed through the RPC, and are accessible via a variety of languages, including C++, Python, C# and Java.</p>
 <p>These APIs are also available as part of a separate, independent cross-platform library, so you can deploy them on a companion computer on your vehicle. This way you can write and test your code in the simulator, and later execute it on the real vehicles. Transfer learning and related research is one of our focus areas.</p>
 <p>Note that you can use <a href="https://microsoft.github.io/AirSim/settings#simmode">SimMode setting</a> to specify the default vehicle or the new <a href="https://microsoft.github.io/AirSim/image_apis#computer-vision-mode-1">ComputerVision mode</a> so you don't get prompted each time you start AirSim.</p>
-<p><a href="https://microsoft.github.io/AirSim/apis/">More details</a></p>
+<p><a href="https://microsoft.github.io/AirSim/apis">More details</a></p>
 <h3 id="gathering-training-data">Gathering training data<a class="headerlink" href="#gathering-training-data" title="Permanent link">#</a></h3>
 <p>There are two ways you can generate training data from AirSim for deep learning. The easiest way is to simply press the record button in the lower right corner. This will start writing pose and images for each frame. The data logging code is pretty simple and you can modify it to your heart's content.</p>
 <p><img alt="record screenshot" src="images/record_data.png" /></p>
 <p>A better way to generate training data exactly the way you want is by accessing the APIs. This allows you to be in full control of how, what, where and when you want to log data.</p>
 <h3 id="computer-vision-mode">Computer Vision mode<a class="headerlink" href="#computer-vision-mode" title="Permanent link">#</a></h3>
 <p>Yet another way to use AirSim is the so-called "Computer Vision" mode. In this mode, you don't have vehicles or physics. You can use the keyboard to move around the scene, or use APIs to position available cameras in any arbitrary pose, and collect images such as depth, disparity, surface normals or object segmentation.</p>
-<p><a href="https://microsoft.github.io/AirSim/image_apis/">More details</a></p>
+<p><a href="https://microsoft.github.io/AirSim/image_apis">More details</a></p>
 <h3 id="weather-effects">Weather Effects<a class="headerlink" href="#weather-effects" title="Permanent link">#</a></h3>
 <p>Press F10 to see various options available for weather effects. You can also control the weather using <a href="https://microsoft.github.io/AirSim/apis#weather-apis">APIs</a>. Press F1 to see other options available.</p>
 <p><img alt="record screenshot" src="images/weather_menu.png" /></p>
@@ -424,17 +473,20 @@
   </div>
 
   <div class="rst-versions" role="note" aria-label="versions">
-    <span class="rst-current-version" data-toggle="rst-current-version">
-      
-          <a href="https://github.com/microsoft/airsim/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
-      
-      
-      
-        <span style="margin-left: 15px"><a href="CHANGELOG/" style="color: #fcfcfc">Next &raquo;</a></span>
-      
-    </span>
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/microsoft/airsim/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+      <span><a href="CHANGELOG/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
 </div>
     <script>var base_url = '.';</script>
+    <script src="js/theme_extra.js" defer></script>
     <script src="js/theme.js" defer></script>
       <script src="https://polyfill.io/v3/polyfill.min.js?features=es6" defer></script>
       <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
