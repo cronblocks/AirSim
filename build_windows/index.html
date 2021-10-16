@@ -151,6 +151,8 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../adding_new_apis/">Adding new APIs</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../modify_recording_data/">Modifying Recording Data</a>
+                    </li>
                     <li class="toctree-l1"><a class="reference internal" href="../coding_guidelines/">Coding Guidelines</a>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../flight_controller/">Flight Controller</a>
@@ -324,7 +326,7 @@ Click on the <code>Install</code> button on the top right, which should show the
 <h2 id="build-airsim">Build AirSim<a class="headerlink" href="#build-airsim" title="Permanent link">#</a></h2>
 <ul>
 <li>Install Visual Studio 2019.
-<strong>Make sure</strong> to select <strong>Desktop Development with C++</strong> and <strong>Windows 10 SDK 10.0.18362</strong> (should be selected by default) while installing VS 2019.</li>
+<strong>Make sure</strong> to select <strong>Desktop Development with C++</strong> and <strong>Windows 10 SDK 10.0.18362</strong> (should be selected by default) and select the latest .NET Framework SDK under the 'Individual Components' tab while installing VS 2019.</li>
 <li>Start <code>Developer Command Prompt for VS 2019</code>.</li>
 <li>
 <p>Clone the repo: <code>git clone https://github.com/Microsoft/AirSim.git</code>, and go the AirSim directory by <code>cd AirSim</code>.</p>
@@ -335,7 +337,7 @@ Click on the <code>Install</code> button on the top right, which should show the
 </li>
 </ul>
 <h2 id="build-unreal-project">Build Unreal Project<a class="headerlink" href="#build-unreal-project" title="Permanent link">#</a></h2>
-<p>Finally, you will need an Unreal project that hosts the environment for your vehicles. AirSim comes with a built-in "Blocks Environment" which you can use, or you can create your own. Please see <a href="../unreal_proj/">setting up Unreal Environment</a>.</p>
+<p>Finally, you will need an Unreal project that hosts the environment for your vehicles. Make sure to close and re-open the Unreal Engine and the Epic Games Launcher before building your first environment if you haven't done so already. After restarting the Epic Games Launcher it will ask you to associate project file extensions with Unreal Engine, click on 'fix now' to fix it. AirSim comes with a built-in "Blocks Environment" which you can use, or you can create your own. Please see <a href="../unreal_proj/">setting up Unreal Environment</a>.</p>
 <h2 id="setup-remote-control-multirotor-only">Setup Remote Control (Multirotor only)<a class="headerlink" href="#setup-remote-control-multirotor-only" title="Permanent link">#</a></h2>
 <p>A remote control is required if you want to fly manually. See the <a href="../remote_control/">remote control setup</a> for more details.</p>
 <p>Alternatively, you can use <a href="../apis/">APIs</a> for programmatic control or use the so-called <a href="../image_apis/">Computer Vision mode</a> to move around using the keyboard.</p>
