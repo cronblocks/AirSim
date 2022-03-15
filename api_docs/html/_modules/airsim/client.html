@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>airsim.client &mdash; airsim 1.6.0 documentation</title>
+  <title>airsim.client &mdash; airsim 1.7.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -27,7 +27,7 @@
             <a href="../../index.html" class="icon icon-home"> airsim
           </a>
               <div class="version">
-                1.6.0
+                1.7.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -525,6 +525,8 @@
 
 <div class="viewcode-block" id="VehicleClient.simGetVehiclePose"><a class="viewcode-back" href="../../index.html#airsim.client.VehicleClient.simGetVehiclePose">[docs]</a>    <span class="k">def</span> <span class="nf">simGetVehiclePose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vehicle_name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The position inside the returned Pose is in the frame of the vehicle&#39;s starting point</span>
+<span class="sd">        </span>
 <span class="sd">        Args:</span>
 <span class="sd">            vehicle_name (str, optional): Name of the vehicle to get the Pose of</span>
 
@@ -549,6 +551,8 @@
 
 <div class="viewcode-block" id="VehicleClient.simGetObjectPose"><a class="viewcode-back" href="../../index.html#airsim.client.VehicleClient.simGetObjectPose">[docs]</a>    <span class="k">def</span> <span class="nf">simGetObjectPose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">object_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The position inside the returned Pose is in the world frame</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            object_name (str): Object to get the Pose of</span>
 
@@ -855,6 +859,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get Ground truth kinematics of the vehicle</span>
 
+<span class="sd">        The position inside the returned KinematicsState is in the frame of the vehicle&#39;s starting point</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            vehicle_name (str, optional): Name of the vehicle</span>
 
@@ -881,6 +887,8 @@
 <div class="viewcode-block" id="VehicleClient.simGetGroundTruthEnvironment"><a class="viewcode-back" href="../../index.html#airsim.client.VehicleClient.simGetGroundTruthEnvironment">[docs]</a>    <span class="k">def</span> <span class="nf">simGetGroundTruthEnvironment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vehicle_name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get ground truth environment state</span>
+
+<span class="sd">        The position inside the returned EnvironmentState is in the frame of the vehicle&#39;s starting point</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            vehicle_name (str, optional): Name of the vehicle</span>
@@ -1248,10 +1256,12 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">call_async</span><span class="p">(</span><span class="s1">&#39;moveByVelocityZBodyFrame&#39;</span><span class="p">,</span> <span class="n">vx</span><span class="p">,</span> <span class="n">vy</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="n">drivetrain</span><span class="p">,</span> <span class="n">yaw_mode</span><span class="p">,</span> <span class="n">vehicle_name</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MultirotorClient.moveByAngleZAsync"><a class="viewcode-back" href="../../index.html#airsim.client.MultirotorClient.moveByAngleZAsync">[docs]</a>    <span class="k">def</span> <span class="nf">moveByAngleZAsync</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pitch</span><span class="p">,</span> <span class="n">roll</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">yaw</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="n">vehicle_name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">call_async</span><span class="p">(</span><span class="s1">&#39;moveByAngleZ&#39;</span><span class="p">,</span> <span class="n">pitch</span><span class="p">,</span> <span class="n">roll</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">yaw</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="n">vehicle_name</span><span class="p">)</span></div>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;moveByAngleZAsync API is deprecated, use moveByRollPitchYawZAsync() API instead&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">call_async</span><span class="p">(</span><span class="s1">&#39;moveByRollPitchYawZ&#39;</span><span class="p">,</span> <span class="n">roll</span><span class="p">,</span> <span class="o">-</span><span class="n">pitch</span><span class="p">,</span> <span class="o">-</span><span class="n">yaw</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="n">vehicle_name</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MultirotorClient.moveByAngleThrottleAsync"><a class="viewcode-back" href="../../index.html#airsim.client.MultirotorClient.moveByAngleThrottleAsync">[docs]</a>    <span class="k">def</span> <span class="nf">moveByAngleThrottleAsync</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pitch</span><span class="p">,</span> <span class="n">roll</span><span class="p">,</span> <span class="n">throttle</span><span class="p">,</span> <span class="n">yaw_rate</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="n">vehicle_name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">call_async</span><span class="p">(</span><span class="s1">&#39;moveByAngleThrottle&#39;</span><span class="p">,</span> <span class="n">pitch</span><span class="p">,</span> <span class="n">roll</span><span class="p">,</span> <span class="n">throttle</span><span class="p">,</span> <span class="n">yaw_rate</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="n">vehicle_name</span><span class="p">)</span></div>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;moveByAngleThrottleAsync API is deprecated, use moveByRollPitchYawrateThrottleAsync() API instead&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">call_async</span><span class="p">(</span><span class="s1">&#39;moveByRollPitchYawrateThrottle&#39;</span><span class="p">,</span> <span class="n">roll</span><span class="p">,</span> <span class="o">-</span><span class="n">pitch</span><span class="p">,</span> <span class="o">-</span><span class="n">yaw_rate</span><span class="p">,</span> <span class="n">throttle</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="n">vehicle_name</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MultirotorClient.moveByVelocityAsync"><a class="viewcode-back" href="../../index.html#airsim.client.MultirotorClient.moveByVelocityAsync">[docs]</a>    <span class="k">def</span> <span class="nf">moveByVelocityAsync</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vx</span><span class="p">,</span> <span class="n">vy</span><span class="p">,</span> <span class="n">vz</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="n">drivetrain</span> <span class="o">=</span> <span class="n">DrivetrainType</span><span class="o">.</span><span class="n">MaxDegreeOfFreedom</span><span class="p">,</span> <span class="n">yaw_mode</span> <span class="o">=</span> <span class="n">YawMode</span><span class="p">(),</span> <span class="n">vehicle_name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1610,6 +1620,8 @@
 <span class="c1">#query vehicle state</span>
 <div class="viewcode-block" id="MultirotorClient.getMultirotorState"><a class="viewcode-back" href="../../index.html#airsim.client.MultirotorClient.getMultirotorState">[docs]</a>    <span class="k">def</span> <span class="nf">getMultirotorState</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vehicle_name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The position inside the returned MultirotorState is in the frame of the vehicle&#39;s starting point</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            vehicle_name (str, optional): Vehicle to get the state of</span>
 
@@ -1650,6 +1662,8 @@
 
 <div class="viewcode-block" id="CarClient.getCarState"><a class="viewcode-back" href="../../index.html#airsim.client.CarClient.getCarState">[docs]</a>    <span class="k">def</span> <span class="nf">getCarState</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vehicle_name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The position inside the returned CarState is in the frame of the vehicle&#39;s starting point</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            vehicle_name (str, optional): Name of vehicle</span>
 
